@@ -41,7 +41,9 @@ public class App extends Application
             if (desk.mas[t.x][t.y].is_chosen){
                 desk.moveShape(t);
             }
-            desk.showMoves(t);
+            else{
+                desk.showMoves(t);
+            }
             
         });
 

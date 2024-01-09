@@ -77,13 +77,12 @@ public class Desk extends Rectangle {
         lat_i = i;
         lat_j = j;
         //множество доступных ходов
-        List<Coords> k = (mas[i][j]).moves(coord);
+        List<Coords> k = (mas[i][j]).moves(coord, this);
 
         //закраска возможных ходов
         for (Coords a : k) {
-            mas[a.x][a.y].select();
-            System.out.println(a.x + " " + a.y);
             scene.getChildren().remove(mas[a.x][a.y]);
+            mas[a.x][a.y].select();
             mas[a.x][a.y].setX(margin + step*a.x);
             mas[a.x][a.y].setY(margin + step*a.y);
             scene.getChildren().add(mas[a.x][a.y]);
@@ -93,17 +92,31 @@ public class Desk extends Rectangle {
 
     //подвинуть фигуру
     public void moveShape(Coords a){
-        scene.getChildren().remove(mas[lat_i][lat_j]);
-        scene.getChildren().remove(mas[a.x][a.y]);
-        
-        mas[lat_i][lat_j].setX(margin + step*a.x);
-        mas[lat_i][lat_j].setY(margin + step*a.y);
+        for (Coords n : latest) {
+            mas[n.x][n.y].unSelect();
+            scene.getChildren().remove(mas[n.x][n.y]);
+        }
+        Figure t = mas[a.x][a.y];
         mas[a.x][a.y] = mas[lat_i][lat_j];
-        // mas[lat_i][lat_j] = new Figure() {
-            
-        // };
+        mas[lat_i][lat_j] = t;
+        arrage();
+        latest = new ArrayList<>(); 
+    }
 
-        scene.getChildren().add(mas[lat_i][lat_j]);
-        scene.getChildren().add(mas[a.x][a.y]);
+    //расстановка фигур согласно mas
+    private void arrage(){
+        for (int i=0; i<8; i++){
+            for (int j=0; j<8; j++){
+                scene.getChildren().remove(mas[i][j]);
+                mas[i][j].setX(margin + step*i);
+                mas[i][j].setY(margin + step*j);
+                scene.getChildren().add(mas[i][j]);
+            }
+        }   
+    }
+
+    //проверка есть ли фигура на этом месте
+    public boolean hasShape(Coords a){
+        return mas[a.x][a.y].is_alive();
     }
 }
