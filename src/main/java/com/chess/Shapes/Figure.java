@@ -5,6 +5,7 @@ import java.util.List;
 import com.chess.Shapes.AdditionalClass.Coords;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -15,32 +16,20 @@ public abstract class Figure extends Rectangle {
     String path;
     public Figure(boolean w){
         super();
-        // setX(35 + 78.5*x);
-        // setY(35+78.5*y);
-        // coord = new Coords(x, y);
-        setWidth(78.5);
-        setHeight(78.5);
+        setWidth(80.5);
+        setHeight(80);
         white = w;
-        path = "pict/pesh";
-        if (w == false) path+="_b.png";
-        else path+=".png";
-        if (getClass().getResource(path) != null) {
-            String imageBG = getClass().getResource(path).toString();
-            this.setFill(new ImagePattern(new Image(imageBG)));
+        this.setFill(new Color(0.1, 0.0, 0.0, 1));
 
-        } else {
-            System.err.println(path);
-        }
-        // setArcWidth(20);
-        // setArcHeight(20);
-        
     }
+    
     public Figure(){
-        this(1, 1, true);
+        this(true);
     }
 
-    public List<Coords> moves(){
+    public List<Coords> moves(Coords coord){
         List<Coords> t = new ArrayList<>();
+        t.add(new Coords(0, 0));
         return t;
     }
 

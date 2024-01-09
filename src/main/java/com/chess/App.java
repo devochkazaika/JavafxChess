@@ -31,12 +31,14 @@ public class App extends Application
     @Override
     public void start(Stage stage) {
         root = new Pane();
-        scene = new Scene(root, 800, 800, Color.WHITESMOKE);
+        scene = new Scene(root, 700, 700, Color.WHITESMOKE);
         desk = new Desk(root);
 
         //кликанье по доске
         scene.setOnMouseClicked(mouseevent ->{
+            
             Coords t = desk.getPos(mouseevent.getX(), mouseevent.getY());
+            // System.out.println(t.x + " " + t.y);
             desk.showMoves(t);
             
         });
@@ -44,12 +46,11 @@ public class App extends Application
         initUI(stage);
     }
     private void initUI(Stage stage) {
-        var canvas = new Canvas(800, 800);
-        root.getChildren().add(desk);
+        var canvas = new Canvas(700, 700);
 
         // Spawn t = new Spawn();
         // root.getChildren().add(t);
-        Spawn t2 = new Spawn(2, 3, false);
+        Spawn t2 = new Spawn(false);
 
         root.getChildren().add(t2);
         // root.getChildren().add(b);
