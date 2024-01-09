@@ -38,7 +38,9 @@ public class App extends Application
         scene.setOnMouseClicked(mouseevent ->{
             
             Coords t = desk.getPos(mouseevent.getX(), mouseevent.getY());
-            // System.out.println(t.x + " " + t.y);
+            if (desk.mas[t.x][t.y].is_chosen){
+                desk.moveShape(t);
+            }
             desk.showMoves(t);
             
         });

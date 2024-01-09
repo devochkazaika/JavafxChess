@@ -14,12 +14,15 @@ public abstract class Figure extends Rectangle {
     Coords coord;
     // String imageBG = getClass().getResource("pict/pesh.png").toExternalForm();
     String path;
+    public boolean is_chosen;
+
     public Figure(boolean w){
         super();
         setWidth(80.5);
         setHeight(80);
         white = w;
-        this.setFill(new Color(0.1, 0.0, 0.0, 1));
+        is_chosen = false;
+        this.setFill(new Color(0.1, 0.0, 0.0, 0));
 
     }
     
@@ -33,5 +36,15 @@ public abstract class Figure extends Rectangle {
         return t;
     }
 
-    
+    public final void select(){
+        is_chosen = true;
+        this.setFill(new Color(0, 1, 0.0, 0.2));
+    }
+    public final void unSelect(){
+        is_chosen = false;
+        this.setFill(new Color(0, 1, 0.0, 0.2));
+    }
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
